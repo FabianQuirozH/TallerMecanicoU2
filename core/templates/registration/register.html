@@ -1,0 +1,40 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block principal %}
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="row w-100">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="text-center">Ingrese tus credenciales</h2>
+                    <hr>
+                    <!-- Aquí se muestran los mensajes en un recuadro grande -->
+                    {% if messages %}
+                        <div class="message-box w-100 mb-4">
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                    {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    <!-- Fin de los mensajes -->
+                    <form action="" method="POST" class="d-flex flex-column align-items-center text-center">
+                        {% csrf_token %}
+                        <div class="form-group w-75 mb-3">
+                            {{ form }}
+                        </div>
+                        <div class="d-flex justify-content-between w-75">
+                            <a href="{% url 'index' %}" class="btn btn-link">Ir al home</a>
+                            <a href="{% url 'login' %}" class="btn btn-link">Iniciar sesión</a>
+                            <input class="btn btn-danger" type="submit" value="Registrarse">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
